@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Wesley Alumni EOI Submissions</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { color: #2c3e50; }
+    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #f4f4f4; }
+    tr:nth-child(even) { background-color: #f9f9f9; }
+  </style>
+</head>
+<body>
+  <h1>Wesley Alumni EOI Submissions</h1>
+  <table id="submissionsTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Full Name</th>
+        <th>Graduation Year</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Occupation</th>
+        <th>Positions</th>
+        <th>Motivation</th>
+        <th>Experience</th>
+        <th>Commitment</th>
+        <th>Meetings</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    async function loadSubmissions() {
+      try {
+        const response = await fetch("http://localhost:3000/submissions");
+        const data = await response.json();
+        const tbody = document.querySelector("#submissionsTable tbody");
+        tbody.innerHTML = "";
+
+        data.forEach(submission => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${submission.id}</td>
+            <td>${submission.fullName}</td>
+            <td>${submission.gradYear}</td>
+            <td>${submission.email}</td>
+            <td>${submission.phone}</td>
+            <td>${submission.occupation}</td>
+            <td>${submission.positions.join(", ")}</td>
+            <td>${submission.motivation}</td>
+            <td>${submission.experience}</td>
+            <td>${submission.commitment}</td>
+            <td>${submission.meetings}</td>
+            <td>${submission.date}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      } catch (err) {
+        console.error("Error loading submissions:", err);
+      }
+    }
+
+    loadSubmissions();
+  </script>
+</body>
+</html>

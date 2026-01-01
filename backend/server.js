@@ -1,15 +1,20 @@
-// server.js
 const express = require('express');
 const cors = require('cors');
 const sqlite3 = require('sqlite3').verbose();
+const path = require('path');
 
 const app = express();
+
+// Allow requests from your frontend (you can restrict this later)
 app.use(cors());
+
+// Parse JSON and form data
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Initialize SQLite database
-const db = new sqlite3.Database('./wesley_eoi.db');
+// SQLite database
+const db = new sqlite3.Database(path.join(__dirname, 'wesley_eoi.db'));
+
 db.run(`
   CREATE TABLE IF NOT EXISTS submissions (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -31,7 +36,7 @@ db.run(`
   )
 `);
 
-// Handle form submission
+// Submit form
 app.post('/submit', (req, res) => {
   const positions = Array.isArray(req.body.position)
     ? req.body.position
@@ -50,30 +55,35 @@ app.post('/submit', (req, res) => {
     req.body.gradYear,
     req.body.email,
     req.body.phone,
-    req.body.occupation || '',
+    req.body.occupation,
     JSON.stringify(positions),
-    req.body.positionOther || '',
-    req.body.motivation || '',
-    req.body.experience || '',
-    req.body.commitment || '',
-    req.body.meetings || '',
-    req.body.declaration ? 1 : 0,
-    req.body.signature || '',
-    req.body.date || '',
+    req.body.positionOther,
+    req.body.motivation,
+    req.body.experience,
+    req.body.commitment,
+    req.body.meetings,
+    req.body.declaration,
+    req.body.signature,
+    req.body.date,
     new Date().toISOString(),
     function (err) {
-      if (err) return res.status(500).json({ ok: false, error: err.message });
-      res.json({ ok: true, id: this.lastID });
+      if (err) {
+        console.error(err);
+        return res.status(500).send("Error saving submission");
+      }
+      res.json({ message: "Submission saved successfully" });
     }
   );
 });
 
-// Endpoint to view submissions
+// View submissions
 app.get('/submissions', (req, res) => {
   db.all('SELECT * FROM submissions ORDER BY createdAt DESC', [], (err, rows) => {
-    if (err) return res.status(500).json({ ok: false, error: err.message });
-    res.json(rows.map(r => ({ ...r, positions: JSON.parse(r.positions || '[]') })));
+    if (err) return res.status(500).send("Error retrieving submissions");
+    res.json(rows);
   });
 });
 
-app.listen(3000, () => console.log('Server running on http://localhost:3000'));
+// Render requires dynamic port
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));

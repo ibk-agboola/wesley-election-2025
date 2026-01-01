@@ -77,6 +77,34 @@ app.get('/submissions', (req, res) => {
     res.json(rows);
   });
 });
+// Export submissions as CSV
+app.get('/export-csv', (req, res) => {
+  db.all("SELECT * FROM submissions ORDER BY createdAt DESC", (err, rows) => {
+    if (err) {
+      return res.status(500).send("Error retrieving data");
+    }
+
+    if (rows.length === 0) {
+      return res.status(200).send("No submissions available");
+    }
+
+    // Create CSV header
+    const header = Object.keys(rows[0]).join(",") + "\n";
+
+    // Create CSV rows
+    const csv = header + rows.map(row =>
+      Object.values(row).map(value =>
+        `"${String(value).replace(/"/g, '""')}"`
+      ).join(",")
+    ).join("\n");
+
+    // Tell browser to download the file
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", "attachment; filename=submissions.csv");
+
+    res.send(csv);
+  });
+});
 
 // Render port
 const PORT = process.env.PORT || 3000;

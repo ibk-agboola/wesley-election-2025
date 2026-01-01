@@ -1,20 +1,14 @@
 const express = require('express');
 const cors = require('cors');
 const sqlite3 = require('sqlite3').verbose();
-const path = require('path');
 
 const app = express();
-
-// Allow requests from your frontend (you can restrict this later)
 app.use(cors());
-
-// Parse JSON and form data
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// SQLite database
-const db = new sqlite3.Database(path.join(__dirname, 'wesley_eoi.db'));
-
+// Database
+const db = new sqlite3.Database('./wesley_eoi.db');
 db.run(`
   CREATE TABLE IF NOT EXISTS submissions (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -71,7 +65,7 @@ app.post('/submit', (req, res) => {
         console.error(err);
         return res.status(500).send("Error saving submission");
       }
-      res.json({ message: "Submission saved successfully" });
+      res.redirect("https://wesley-election-frontend.onrender.com/success.html");
     }
   );
 });
@@ -84,6 +78,6 @@ app.get('/submissions', (req, res) => {
   });
 });
 
-// Render requires dynamic port
+// Render port
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));

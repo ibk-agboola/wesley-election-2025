@@ -88,7 +88,8 @@ app.post("/submit", async (req, res) => {
       ]
     );
 
-    res.redirect("https://wesley-election-frontend.onrender.com/success.html");
+    res.status(200).json({ success: true });
+
   } catch (err) {
     console.error("Submission error:", err);
     res.status(500).send("Error saving submission");

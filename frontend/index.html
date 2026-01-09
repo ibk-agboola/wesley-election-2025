@@ -86,105 +86,100 @@
         </div>
         <h1>WESLEY COLLEGE OF SCIENCE – Alumni Executives Election Expression of Interest Form</h1>
 
-       <form action="https://wesley-election-2025-1.onrender.com/submit" method="post">
+<form id="eoiForm" action="https://wesley-election-2025-1.onrender.com/submit" method="post">
 
- method="post">
-            <!-- Personal Information -->
-            <label for="fullName">Full Name:</label>
-            <input type="text" id="fullName" name="fullName" required>
+    <!-- Personal Information -->
+    <label for="fullName">Full Name:</label>
+    <input type="text" id="fullName" name="fullName" required>
 
-            <label for="gradYear">Year of Graduation:</label>
-            <input type="text" id="gradYear" name="gradYear" required>
+    <label for="gradYear">Year of Graduation:</label>
+    <input type="text" id="gradYear" name="yearOfGraduation" required>
 
-            <label for="email">Email Address:</label>
-            <input type="email" id="email" name="email" required>
+    <label for="email">Email Address:</label>
+    <input type="email" id="email" name="email" required>
 
-            <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" required>
+    <label for="phone">Phone Number:</label>
+    <input type="tel" id="phone" name="phone" required>
 
-            <label for="occupation">Current Occupation/Role:</label>
-            <input type="text" id="occupation" name="occupation">
+    <label for="occupation">Current Occupation/Role:</label>
+    <input type="text" id="occupation" name="occupation">
 
-            <!-- Position of Interest -->
-            <label>Position of Interest:</label>
-            <div class="checkbox-group">
-                <label><input type="checkbox" name="position" value="President"> President</label>
-                <label><input type="checkbox" name="position" value="Vice President"> Vice President</label>
-                <label><input type="checkbox" name="position" value="General Secretary"> General Secretary</label>
-                <label><input type="checkbox" name="position" value="Assistant Secretary"> Assistant Secretary</label>
-                <label><input type="checkbox" name="position" value="Treasurer"> Treasurer</label>
-                <label><input type="checkbox" name="position" value="Public Relations Officer"> Public Relations Officer</label>
-                <label><input type="checkbox" name="position" value="Welfare Officer"> Welfare Officer</label>
-                <label><input type="checkbox" name="position" value="Other"> Other: <input type="text" name="positionOther"></label>
-            </div>
+    <!-- Position of Interest -->
+    <label>Position of Interest:</label>
+    <div class="checkbox-group">
+        <label><input type="checkbox" name="position" value="President"> President</label>
+        <label><input type="checkbox" name="position" value="Vice President"> Vice President</label>
+        <label><input type="checkbox" name="position" value="General Secretary"> General Secretary</label>
+        <label><input type="checkbox" name="position" value="Assistant Secretary"> Assistant Secretary</label>
+        <label><input type="checkbox" name="position" value="Treasurer"> Treasurer</label>
+        <label><input type="checkbox" name="position" value="Public Relations Officer"> Public Relations Officer</label>
+        <label><input type="checkbox" name="position" value="Welfare Officer"> Welfare Officer</label>
+        <label>
+            <input type="checkbox" name="position" value="Other"> Other:
+            <input type="text" name="positionOther">
+        </label>
+    </div>
 
-            <!-- Motivation & Experience -->
-            <label for="motivation">Why are you interested in this position?</label>
-            <textarea id="motivation" name="motivation" rows="4"></textarea>
+    <!-- Motivation & Experience -->
+    <label for="motivation">Why are you interested in this position?</label>
+    <textarea id="motivation" name="motivation" rows="4"></textarea>
 
-            <label for="experience">Relevant Experience:</label>
-            <textarea id="experience" name="experience" rows="4"></textarea>
+    <label for="experience">Relevant Experience:</label>
+    <textarea id="experience" name="experience" rows="4"></textarea>
 
-            <!-- Commitment -->
-            <label>Are you able to commit to the responsibilities of this role for the full tenure?</label>
-            <div class="radio-group">
-                <label><input type="radio" name="commitment" value="Yes" required> Yes</label>
-                <label><input type="radio" name="commitment" value="No"> No</label>
-            </div>
+    <!-- Commitment -->
+    <label>Are you able to commit to the responsibilities of this role for the full tenure?</label>
+    <div class="radio-group">
+        <label><input type="radio" name="commitment" value="Yes" required> Yes</label>
+        <label><input type="radio" name="commitment" value="No"> No</label>
+    </div>
 
-            <label>Are you willing to attend regular meetings and alumni events?</label>
-            <div class="radio-group">
-                <label><input type="radio" name="meetings" value="Yes" required> Yes</label>
-                <label><input type="radio" name="meetings" value="No"> No</label>
-            </div>
+    <label>Are you willing to attend regular meetings and alumni events?</label>
+    <div class="radio-group">
+        <label><input type="radio" name="meetings" value="Yes" required> Yes</label>
+        <label><input type="radio" name="meetings" value="No"> No</label>
+    </div>
 
-            <!-- Declaration -->
-            <label><input type="checkbox" name="declaration" required> I confirm the information provided is true and accurate.</label>
+    <!-- Declaration -->
+    <label>
+        <input type="checkbox" name="declaration" value="Yes" required>
+        I confirm the information provided is true and accurate.
+    </label>
 
-            <label for="signature">Signature:</label>
-            <input type="text" id="signature" name="signature">
+    <label for="signature">Signature:</label>
+    <input type="text" id="signature" name="signature">
 
-            <label for="date">Date:</label>
-            <input type="date" id="date" name="date">
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date">
 
-            <!-- Submit Button -->
-            <div class="submit-button">
-                <input type="submit" value="Submit">
-            </div>
-<form id="eoiForm" action="https://wesley-election-2025.onrender.com/submit" method="post">
-  <!-- your form fields here -->
+    <!-- Submit Button -->
+    <div class="submit-button">
+        <button type="submit">Submit</button>
+    </div>
 
-  <!-- Submit Button -->
-  <div class="submit-button">
-    <button type="submit">Submit</button>
-  </div>
-
-  <!-- Success Message -->
- <div id="successMessage" style="display:none; color:green; margin-top:10px;">
-  ✅ Thank you! Your submission has been received.
-</div>
+    <!-- Success Message -->
+    <div id="successMessage" style="display:none; color:green; margin-top:10px;">
+        ✅ Thank you! Your submission has been received.
+    </div>
 
 </form>
 
 <script>
 document.getElementById("eoiForm").addEventListener("submit", async function(event) {
-  event.preventDefault(); // stop normal form submission
+    event.preventDefault();
 
-  const formData = new FormData(this);
-  const response = await fetch(this.action, {
-    method: this.method,
-    body: formData
-  });
+    const formData = new FormData(this);
 
-  if (response.ok) {
-    document.getElementById("successMessage").style.display = "block";
-    this.reset(); // clear the form
-  } else {
-    alert("❌ Something went wrong. Please try again.");
-  }
+    const response = await fetch(this.action, {
+        method: this.method,
+        body: formData
+    });
+
+    if (response.ok) {
+        document.getElementById("successMessage").style.display = "block";
+        this.reset();
+    } else {
+        alert("❌ Something went wrong. Please try again.");
+    }
 });
 </script>
-
-</body>
-</html>
-  

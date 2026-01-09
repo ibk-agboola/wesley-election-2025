@@ -193,7 +193,13 @@ document.getElementById("eoiForm").addEventListener("submit", async function(eve
     });
 
     if (response.ok) {
-      window.location.href = "success.html";
+  // Open success page in a new tab
+  window.open("success.html", "_blank");
+
+  // Attempt to close the current tab
+  window.close();
+}
+
 
     } else {
       alert("❌ Submission failed. Please try again.");

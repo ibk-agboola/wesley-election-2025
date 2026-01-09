@@ -67,6 +67,9 @@ app.post("/submit", async (req, res) => {
     date
   } = req.body;
 
+  // Convert checkbox value to boolean
+  const declarationBool = declaration === "on" || declaration === true;
+
   try {
     await pool.query(
       `INSERT INTO submissions (
@@ -86,7 +89,7 @@ app.post("/submit", async (req, res) => {
         experience,
         commitment,
         meetings,
-        declaration,
+        declarationBool,
         signature,
         date
       ]
@@ -94,7 +97,7 @@ app.post("/submit", async (req, res) => {
 
     res.redirect("https://wesley-election-frontend.onrender.com/success.html");
   } catch (err) {
-    console.error(err);
+    console.error("Submission error:", err);
     res.status(500).send("Error saving submission");
   }
 });

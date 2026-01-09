@@ -193,9 +193,8 @@ document.getElementById("eoiForm").addEventListener("submit", async function(eve
     });
 
     if (response.ok) {
-  window.open("success.html", "_blank");
-}
-
+      window.open("success.html", "_blank");
+      window.close(); // may be blocked if tab wasn't opened by JS
     } else {
       alert("❌ Submission failed. Please try again.");
     }

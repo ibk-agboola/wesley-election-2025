@@ -155,3 +155,26 @@ app.get("/export-csv", async (req, res) => {
 // ------------------------------------------------------
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));
+
+// ------------------------------------------------------
+// TEMP: DELETE TEST SUBMISSIONS
+// ------------------------------------------------------
+app.get("/delete-test-submissions", async (req, res) => {
+  try {
+    const result = await pool.query(`
+      DELETE FROM submissions
+      WHERE full_name ILIKE '%test%'
+         OR email ILIKE '%test%'
+         OR motivation ILIKE '%jvhbb%'
+         OR experience ILIKE '%hkgjbln%'
+         OR full_name ILIKE '%Ibukun%'
+         OR signature ILIKE '%test%';
+    `);
+
+    res.send("Test submissions deleted successfully.");
+  } catch (err) {
+    console.error("Delete error:", err);
+    res.status(500).send("Error deleting test submissions.");
+  }
+});
+

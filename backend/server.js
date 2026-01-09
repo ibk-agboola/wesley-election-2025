@@ -28,6 +28,14 @@ app.get("/init-db", async (req, res) => {
         phone TEXT,
         occupation TEXT,
         position TEXT,
+        position_other TEXT,
+        motivation TEXT,
+        experience TEXT,
+        commitment TEXT,
+        meetings TEXT,
+        declaration BOOLEAN,
+        signature TEXT,
+        date TEXT,
         timestamp TIMESTAMP DEFAULT NOW()
       );
     `);
@@ -48,15 +56,40 @@ app.post("/submit", async (req, res) => {
     email,
     phone,
     occupation,
-    position
+    position,
+    positionOther,
+    motivation,
+    experience,
+    commitment,
+    meetings,
+    declaration,
+    signature,
+    date
   } = req.body;
 
   try {
     await pool.query(
-      `INSERT INTO submissions 
-      (full_name, year_of_graduation, email, phone, occupation, position)
-      VALUES ($1, $2, $3, $4, $5, $6)`,
-      [fullName, yearOfGraduation, email, phone, occupation, position]
+      `INSERT INTO submissions (
+        full_name, year_of_graduation, email, phone, occupation, position,
+        position_other, motivation, experience, commitment, meetings,
+        declaration, signature, date
+      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)`,
+      [
+        fullName,
+        yearOfGraduation,
+        email,
+        phone,
+        occupation,
+        position,
+        positionOther,
+        motivation,
+        experience,
+        commitment,
+        meetings,
+        declaration,
+        signature,
+        date
+      ]
     );
 
     res.redirect("https://wesley-election-frontend.onrender.com/success.html");

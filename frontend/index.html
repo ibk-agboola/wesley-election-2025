@@ -193,8 +193,8 @@ document.getElementById("eoiForm").addEventListener("submit", async function(eve
     });
 
     if (response.ok) {
-      document.getElementById("successMessage").style.display = "block";
-      this.reset();
+      window.location.href = "success.html";
+
     } else {
       alert("❌ Submission failed. Please try again.");
     }

@@ -20,29 +20,20 @@ const pool = new Pool({
 app.get("/init-db", async (req, res) => {
   try {
     await pool.query(`
-      CREATE TABLE IF NOT EXISTS submissions (
-        id SERIAL PRIMARY KEY,
-        full_name TEXT,
-        year_of_graduation TEXT,
-        email TEXT,
-        phone TEXT,
-        occupation TEXT,
-        position TEXT,
-        position_other TEXT,
-        motivation TEXT,
-        experience TEXT,
-        commitment TEXT,
-        meetings TEXT,
-        declaration BOOLEAN,
-        signature TEXT,
-        date TEXT,
-        timestamp TIMESTAMP DEFAULT NOW()
-      );
+      ALTER TABLE submissions
+      ADD COLUMN IF NOT EXISTS position_other TEXT,
+      ADD COLUMN IF NOT EXISTS motivation TEXT,
+      ADD COLUMN IF NOT EXISTS experience TEXT,
+      ADD COLUMN IF NOT EXISTS commitment TEXT,
+      ADD COLUMN IF NOT EXISTS meetings TEXT,
+      ADD COLUMN IF NOT EXISTS declaration BOOLEAN,
+      ADD COLUMN IF NOT EXISTS signature TEXT,
+      ADD COLUMN IF NOT EXISTS date TEXT;
     `);
-    res.send("Submissions table created successfully.");
+    res.send("Submissions table updated successfully.");
   } catch (err) {
     console.error(err);
-    res.status(500).send("Error creating table.");
+    res.status(500).send("Error updating table.");
   }
 });
 

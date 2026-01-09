@@ -166,20 +166,36 @@
 
 <script>
 document.getElementById("eoiForm").addEventListener("submit", async function(event) {
-    event.preventDefault();
+  event.preventDefault();
 
-    const formData = new FormData(this);
+  const data = {
+    fullName: document.getElementById("fullName").value,
+    yearOfGraduation: document.getElementById("gradYear").value,
+    email: document.getElementById("email").value,
+    phone: document.getElementById("phone").value,
+    occupation: document.getElementById("occupation").value,
+    position: Array.from(document.querySelectorAll('input[name="position"]:checked')).map(el => el.value).join(", "),
+    positionOther: document.querySelector('input[name="positionOther"]').value,
+    motivation: document.getElementById("motivation").value,
+    experience: document.getElementById("experience").value,
+    commitment: document.querySelector('input[name="commitment"]:checked')?.value || null,
+    meetings: document.querySelector('input[name="meetings"]:checked')?.value || null,
+    declaration: document.querySelector('input[name="declaration"]')?.checked ? "Yes" : "No",
+    signature: document.getElementById("signature").value,
+    date: document.getElementById("date").value
+  };
 
-    const response = await fetch(this.action, {
-        method: this.method,
-        body: formData
-    });
+  const response = await fetch(this.action, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
 
-    if (response.ok) {
-        document.getElementById("successMessage").style.display = "block";
-        this.reset();
-    } else {
-        alert("❌ Something went wrong. Please try again.");
-    }
+  if (response.ok) {
+    document.getElementById("successMessage").style.display = "block";
+    this.reset();
+  } else {
+    alert("❌ Something went wrong. Please try again.");
+  }
 });
 </script>

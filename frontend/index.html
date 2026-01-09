@@ -185,17 +185,22 @@ document.getElementById("eoiForm").addEventListener("submit", async function(eve
     date: document.getElementById("date").value
   };
 
-  const response = await fetch(this.action, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data)
-  });
+  try {
+    const response = await fetch(this.action, {
+      method: this.method,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
 
-  if (response.ok) {
-    document.getElementById("successMessage").style.display = "block";
-    this.reset();
-  } else {
-    alert("❌ Something went wrong. Please try again.");
+    if (response.ok) {
+      document.getElementById("successMessage").style.display = "block";
+      this.reset();
+    } else {
+      alert("❌ Submission failed. Please try again.");
+    }
+  } catch (error) {
+    console.error("Submit error:", error);
+    alert("❌ Something went wrong. Check your internet or try again.");
   }
 });
 </script>

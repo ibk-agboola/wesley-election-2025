@@ -17,7 +17,7 @@ const pool = new Pool({
 // ------------------------------------------------------
 // INIT DATABASE (run once, then delete this route)
 // ------------------------------------------------------
-app.get("/init-db", async (req, res) => {
+app.get("/patch-columns", async (req, res) => {
   try {
     await pool.query(`
       ALTER TABLE submissions
@@ -30,10 +30,10 @@ app.get("/init-db", async (req, res) => {
         ADD COLUMN IF NOT EXISTS signature TEXT,
         ADD COLUMN IF NOT EXISTS date TEXT;
     `);
-    res.send("Submissions table updated successfully.");
+    res.send("Missing columns added successfully.");
   } catch (err) {
-    console.error("Init error:", err);
-    res.status(500).send("Error updating table.");
+    console.error("Patch error:", err);
+    res.status(500).send("Error patching columns.");
   }
 });
 

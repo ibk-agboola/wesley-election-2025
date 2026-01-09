@@ -88,8 +88,8 @@ app.post("/submit", async (req, res) => {
       ]
     );
 
-    // ✅ Redirect to success page
-    res.redirect("https://wesley-election-frontend.onrender.com/success.html");
+    // ⭐ SUCCESS RESPONSE FOR FRONTEND FETCH()
+    res.status(200).json({ success: true });
 
   } catch (err) {
     console.error("Submission error:", err);

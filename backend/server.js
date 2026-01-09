@@ -21,18 +21,18 @@ app.get("/init-db", async (req, res) => {
   try {
     await pool.query(`
       ALTER TABLE submissions
-      ADD COLUMN IF NOT EXISTS position_other TEXT,
-      ADD COLUMN IF NOT EXISTS motivation TEXT,
-      ADD COLUMN IF NOT EXISTS experience TEXT,
-      ADD COLUMN IF NOT EXISTS commitment TEXT,
-      ADD COLUMN IF NOT EXISTS meetings TEXT,
-      ADD COLUMN IF NOT EXISTS declaration BOOLEAN,
-      ADD COLUMN IF NOT EXISTS signature TEXT,
-      ADD COLUMN IF NOT EXISTS date TEXT;
+        ADD COLUMN IF NOT EXISTS position_other TEXT,
+        ADD COLUMN IF NOT EXISTS motivation TEXT,
+        ADD COLUMN IF NOT EXISTS experience TEXT,
+        ADD COLUMN IF NOT EXISTS commitment TEXT,
+        ADD COLUMN IF NOT EXISTS meetings TEXT,
+        ADD COLUMN IF NOT EXISTS declaration BOOLEAN,
+        ADD COLUMN IF NOT EXISTS signature TEXT,
+        ADD COLUMN IF NOT EXISTS date TEXT;
     `);
     res.send("Submissions table updated successfully.");
   } catch (err) {
-    console.error(err);
+    console.error("Init error:", err);
     res.status(500).send("Error updating table.");
   }
 });

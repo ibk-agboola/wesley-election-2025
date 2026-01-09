@@ -58,8 +58,10 @@ app.post("/submit", async (req, res) => {
     date
   } = req.body;
 
-  // Convert checkbox value to boolean
-  const declarationBool = declaration === "on" || declaration === true;
+  // Convert "Yes"/"No" to boolean
+  const declarationBool = declaration === "Yes";
+  const commitmentBool = commitment === "Yes";
+  const meetingsBool = meetings === "Yes";
 
   try {
     await pool.query(
@@ -78,8 +80,8 @@ app.post("/submit", async (req, res) => {
         positionOther,
         motivation,
         experience,
-        commitment,
-        meetings,
+        commitmentBool,
+        meetingsBool,
         declarationBool,
         signature,
         date

@@ -178,3 +178,33 @@ app.get("/delete-test-submissions", async (req, res) => {
   }
 });
 
+// ------------------------------------------------------
+// TEMP: CREATE VOTES TABLE
+// ------------------------------------------------------
+app.get("/create-votes-table", async (req, res) => {
+  try {
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS votes (
+        id SERIAL PRIMARY KEY,
+        full_name TEXT NOT NULL,
+        email TEXT NOT NULL,
+        otp TEXT NOT NULL,
+        president TEXT,
+        vice_president TEXT,
+        general_secretary TEXT,
+        treasurer TEXT,
+        financial_secretary TEXT,
+        pro_1 TEXT,
+        pro_2 TEXT,
+        welfare_secretary TEXT,
+        created_at TIMESTAMP NOT NULL DEFAULT NOW()
+      );
+    `);
+
+    res.send("✅ Votes table created successfully.");
+  } catch (err) {
+    console.error("Error creating votes table:", err);
+    res.status(500).send("❌ Failed to create votes table.");
+  }
+});
+
